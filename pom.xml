@@ -11,7 +11,7 @@
 	<groupId>com.main</groupId>
 	<artifactId>projeto_final</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+	<name>frotaBackEnd</name>
 	<description/>
 	<url/>
 	<licenses>
@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<start-class>com.main.projeto_final.ProjetoFinalApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>

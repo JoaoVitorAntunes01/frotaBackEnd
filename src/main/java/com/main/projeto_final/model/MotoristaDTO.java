@@ -1,5 +1,7 @@
 package com.main.projeto_final.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +31,16 @@ public class MotoristaDTO {
 
     @ManyToOne
     @JoinColumn(name = "tb_usuarios", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private UsuarioDTO id_usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "tb_empresa", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
+    private EmpresaDTO empresa;
+
+    @Transient
+    private Long id_empresa;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -51,4 +62,22 @@ public class MotoristaDTO {
 
     public UsuarioDTO getId_usuario() { return id_usuario; }
     public void setId_usuario(UsuarioDTO id_usuario) { this.id_usuario = id_usuario; }
+
+    public EmpresaDTO getEmpresa() { return empresa; }
+    public void setEmpresa(EmpresaDTO empresa) {
+        this.empresa = empresa;
+        if (empresa != null) {
+            this.id_empresa = empresa.getId();
+        }
+    }
+
+    @JsonProperty("id_empresa")
+    public Long getId_empresa() {
+        return empresa != null ? empresa.getId() : id_empresa;
+    }
+
+    @JsonProperty("id_empresa")
+    public void setId_empresa(Long id_empresa) {
+        this.id_empresa = id_empresa;
+    }
 }
